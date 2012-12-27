@@ -6,7 +6,7 @@
 
 #imports
 import pygame
-from Fondo import * 
+from Fondo import *
 
 #funciones
 def main():
@@ -18,11 +18,9 @@ def main():
     sprite1 = pygame.sprite.Sprite()
     sprite1.image = imagen1
     sprite1.rect = imagen1.get_rect()    
-    sprite1.rect.top = 40
-    sprite1.rect.left = 40
-    (x,y) = (sprite1.rect.top,sprite1.rect.left)
-    vx = 0
-    vy = 0
+    sprite1.rect.top = 75
+    sprite1.rect.left = 75    
+         
     salir = False
     
     fondo = Fondo()    
@@ -32,29 +30,44 @@ def main():
             if event.type == pygame.QUIT:
                 salir = True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:                                            
-                    vx+=10
+                if event.key == pygame.K_RIGHT:
+                    n = 0 
+                    while n <= 300:                             
+                        sprite1.rect.move_ip(1,0)
+                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(sprite1.image,sprite1.rect)
+                        pygame.display.update()                                                
+                        n = n + 1                                            
                 if event.key == pygame.K_LEFT:                                            
-                    vx-=10
+                    n = 0 
+                    while n <= 300:                             
+                        sprite1.rect.move_ip(-1,0)
+                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(sprite1.image,sprite1.rect)
+                        pygame.display.update()                                                
+                        n = n + 1
                 if event.key == pygame.K_UP:                                            
-                    y-=10
+                    n = 0 
+                    while n <= 200:                             
+                        sprite1.rect.move_ip(0,-1)
+                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(sprite1.image,sprite1.rect)
+                        pygame.display.update()                                                
+                        n = n + 1
                 if event.key == pygame.K_DOWN:                                            
-                    y+=10
-            if event.type == pygame.KEYUP:
-                if event.type == pygame.K_LEFT:
-                    vx = 0
-                if event.type == pygame.K_RIGHT:
-                    vx = 0
-                if event.key == pygame.K_UP:                                            
-                    vy = 0
-                if event.key == pygame.K_DOWN:                                            
-                    vy = 0
-        x+=vx
-        y+=vy
+                    n = 0 
+                    while n <= 200:                             
+                        sprite1.rect.move_ip(0,1)
+                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(sprite1.image,sprite1.rect)
+                        pygame.display.update()                                                
+                        n = n + 1                            
+                            
         reloj1.tick(20)
         pantalla.blit(fondo,(0,0))
-        pantalla.blit(sprite1.image,(x,y))        
-        pygame.display.update()            
+        pantalla.blit(sprite1.image,sprite1.rect)        
+        pygame.display.update()
+                    
     pygame.quit()
-        
-main()
+
+main()                
