@@ -8,16 +8,18 @@ from vec2d import *
 
 class Main(Ventana):
     def __init__(self):
-        self.ancho, self.alto = 900, 600
+        
+        self.ancho, self.alto = 1000, 650
         Ventana.__init__(self, size=(self.ancho, self.alto), fill=((255,255,255)))
         
-        self.fondo= pygame.image.load("images/camino.jpg")
-        self.screen.blit(self.fondo, (0,0))
+       # self.fondo= pygame.image.load("images/camino.jpg")
+        #self.screen.blit(self.fondo, (0,0))
         
         self.muneco=Muneco()
-        self.muneco.posicion= vec2d(400, 300)
-        self.muneco.objetivo= vec2d(300,300)
+        self.muneco.posicion= vec2d(0, 0)
+        self.muneco.objetivo= vec2d(0,0)
         self.screen.blit(self.muneco.marciano , (10,10))
+        self.bandera=True
         
         
         #for n in range(5):
@@ -25,33 +27,30 @@ class Main(Ventana):
             #pygame.draw.circle(self.screen, (0,0,0), (100,100), 30, 1)
         
     def draw(self):
-       # self.screen.fill((255,255,255))
-        self.screen.blit(self.fondo, (0,0))
+        self.screen.fill((255,255,255))
+        #self.screen.blit(self.fondo, (0,0))
         self.screen.blit(self.muneco.marciano , self.muneco.posicion.inttup())
         pygame.draw.circle(self.screen, (255,255,255), self.muneco.objetivo, 30, 1)
        # pygame.draw.circle(self.screen, (0,0,0), self.muneco.posicion.inttup(), 20)
         
-        pygame.draw.circle(self.screen, (0,0,0), (100,100), 30, 1)
-        pygame.draw.circle(self.screen, (0,0,0), (100,200), 30, 1)
-        pygame.draw.circle(self.screen, (0,0,0), (200,100), 30, 1)
-        pygame.draw.circle(self.screen, (0,0,0), (200,200), 30, 1)
+        pygame.draw.circle(self.screen, (0,0,0), (963,100), 30, 1)
+        pygame.draw.circle(self.screen, (0,0,0), (963,550), 30, 1)
+
         
         
     def keyUp(self, key):
         pass
     
     def mouseUp(self, button, pos):
-        if pos[0]>=69 and pos[0]<=127 and pos[1]>=69 and pos[1]<=127:
-            self.muneco.objetivo= vec2d(100,100)
+        if pos[0]>=932 and pos[0]<=992 and pos[1]>=69 and pos[1]<=129 and self.bandera:
+            self.muneco.objetivo= vec2d(870,40)
+            self.bandera=False
             
-        if pos[0]>=169 and pos[0]<=227 and pos[1]>=69 and pos[1]<=127:
-            self.muneco.objetivo= vec2d(200,100)
+        if pos[0]>=932 and pos[0]<=992 and pos[1]>=520 and pos[1]<=580 and self.bandera:
+            self.muneco.objetivo= vec2d(870,490)
+            self.bandera=False
             
-        if pos[0]>=69 and pos[0]<=127 and pos[1]>=169 and pos[1]<=227:
-            self.muneco.objetivo= vec2d(100,200)
-            
-        if pos[0]>=169 and pos[0]<=227 and pos[1]>=169 and pos[1]<=227:
-            self.muneco.objetivo= vec2d(200,200)
+     
         
     def mouseMotion(self, buttons, pos, rel):
         print pos[0],pos[1]
