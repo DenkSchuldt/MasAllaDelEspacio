@@ -10,10 +10,12 @@ import pygame
 class Fondo(pygame.Surface):
     
     fondo = None
+    numero = None
     
-    def __init__(self):
+    def __init__(self, num):
         pygame.Surface.__init__(self,(900,600))
-        self.createFondo()
+        self.numero = num
+        self.createFondo()        
         
     def createSprite(self,x,y,img):
         spt = pygame.sprite.Sprite()
@@ -23,6 +25,11 @@ class Fondo(pygame.Surface):
         return spt
     
     def createFondo(self):
-        self.fondo = self.createSprite(0,0,"./images/camino.jpg")
+        if self.numero == 1:
+            self.fondo = self.createSprite(0,0,"./images/img_01.jpg")
+        if self.numero == 2:
+            self.fondo = self.createSprite(0,0,"./images/img_02.jpg")
+        if self.numero == 3:
+            self.fondo = self.createSprite(0,0,"./images/img_03.jpg")
         self.blit(self.fondo.image,self.fondo.rect)        
         
