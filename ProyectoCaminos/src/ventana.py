@@ -6,7 +6,8 @@ from pygame.locals import *
 class Ventana:
     def __init__(self, size=(900,600), fill=(255,255,255)):
         pygame.init()
-        self.screen = pygame.display.set_mode(size)
+        flags = pygame.FULLSCREEN | pygame.DOUBLEBUF
+        self.screen = pygame.display.set_mode(size,flags)
         self.screen.fill(fill)
         pygame.display.flip()
         self.running = False
