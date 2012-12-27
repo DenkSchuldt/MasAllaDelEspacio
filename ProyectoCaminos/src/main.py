@@ -7,19 +7,24 @@ from vec2d import *
 
 class Main(Ventana):
     def __init__(self):
-        self.ancho, self.alto = 800, 800
-        Ventana.__init__(self, size=(self.ancho, self.ancho), fill=((255,255,255)))
+        self.ancho, self.alto = 900, 600
+        Ventana.__init__(self, size=(self.ancho, self.alto), fill=((255,255,255)))
+        
+        self.fondo= pygame.image.load("images/camino.jpg")
+        self.screen.blit(self.fondo, (0,0))
         
         self.muneco=Muneco()
         self.muneco.posicion= vec2d(400, 300)
         self.muneco.objetivo= vec2d(300,300)
+        
         
         #for n in range(5):
          #   posi=vec2d(uniform(0,800),uniform(0,800))
             #pygame.draw.circle(self.screen, (0,0,0), (100,100), 30, 1)
         
     def draw(self):
-        self.screen.fill((255,255,255))
+       # self.screen.fill((255,255,255))
+        self.screen.blit(self.fondo, (0,0))
         pygame.draw.circle(self.screen, (255,255,255), self.muneco.objetivo, 30, 1)
         pygame.draw.circle(self.screen, (0,0,0), self.muneco.posicion.inttup(), 20)
         
