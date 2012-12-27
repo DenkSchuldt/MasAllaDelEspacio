@@ -5,6 +5,7 @@ from Muneco import *
 from ventana import *
 from vec2d import *
 
+
 class Main(Ventana):
     def __init__(self):
         self.ancho, self.alto = 900, 600
@@ -16,6 +17,7 @@ class Main(Ventana):
         self.muneco=Muneco()
         self.muneco.posicion= vec2d(400, 300)
         self.muneco.objetivo= vec2d(300,300)
+        self.screen.blit(self.muneco.marciano , (10,10))
         
         
         #for n in range(5):
@@ -25,8 +27,9 @@ class Main(Ventana):
     def draw(self):
        # self.screen.fill((255,255,255))
         self.screen.blit(self.fondo, (0,0))
+        self.screen.blit(self.muneco.marciano , self.muneco.posicion.inttup())
         pygame.draw.circle(self.screen, (255,255,255), self.muneco.objetivo, 30, 1)
-        pygame.draw.circle(self.screen, (0,0,0), self.muneco.posicion.inttup(), 20)
+       # pygame.draw.circle(self.screen, (0,0,0), self.muneco.posicion.inttup(), 20)
         
         pygame.draw.circle(self.screen, (0,0,0), (100,100), 30, 1)
         pygame.draw.circle(self.screen, (0,0,0), (100,200), 30, 1)
