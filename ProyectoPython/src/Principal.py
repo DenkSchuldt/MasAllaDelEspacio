@@ -34,7 +34,7 @@ def main():
                     n = 0 
                     while n <= 300:                             
                         sprite1.rect.move_ip(1,0)
-                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(fondo,(0,0))
                         pantalla.blit(sprite1.image,sprite1.rect)
                         pygame.display.update()                                                
                         n = n + 1                                            
@@ -42,7 +42,7 @@ def main():
                     n = 0 
                     while n <= 300:                             
                         sprite1.rect.move_ip(-1,0)
-                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(fondo,(0,0))
                         pantalla.blit(sprite1.image,sprite1.rect)
                         pygame.display.update()                                                
                         n = n + 1
@@ -50,7 +50,7 @@ def main():
                     n = 0 
                     while n <= 200:                             
                         sprite1.rect.move_ip(0,-1)
-                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(fondo,(0,0))
                         pantalla.blit(sprite1.image,sprite1.rect)
                         pygame.display.update()                                                
                         n = n + 1
@@ -58,7 +58,7 @@ def main():
                     n = 0 
                     while n <= 200:                             
                         sprite1.rect.move_ip(0,1)
-                        #pantalla.blit(fondo,(0,0))
+                        pantalla.blit(fondo,(0,0))
                         pantalla.blit(sprite1.image,sprite1.rect)
                         pygame.display.update()                                                
                         n = n + 1                            
