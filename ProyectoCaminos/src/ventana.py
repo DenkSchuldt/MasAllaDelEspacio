@@ -4,7 +4,7 @@ from pygame.locals import *
 #float range. Start=a, End=b, Step=c
         
 class Ventana:
-    def __init__(self, size=(640,480), fill=(255,255,255)):
+    def __init__(self, size=(900,600), fill=(255,255,255)):
         pygame.init()
         self.screen = pygame.display.set_mode(size)
         self.screen.fill(fill)
@@ -42,3 +42,23 @@ class Ventana:
             self.draw()
             pygame.display.flip()
             self.clock.tick(self.fps)
+            
+            
+            
+    def update(self):
+        pass
+        
+    def draw(self):
+        pass
+        
+    def keyDown(self, key):
+        pass
+        
+    def keyUp(self, key):
+        pass
+    
+    def mouseUp(self, button, pos):
+        pass
+        
+    def mouseMotion(self, buttons, pos, rel):
+        pass
