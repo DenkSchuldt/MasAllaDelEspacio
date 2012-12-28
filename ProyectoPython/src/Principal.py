@@ -17,7 +17,7 @@ def main():
     next = pygame.mixer.Sound("./sounds/next.wav")                            
     sonido_01.play()
     pantalla = pygame.display.set_mode([900,600])
-    pygame.display.set_caption("Proyecto")    
+    pygame.display.set_caption("Mas Alla Del Espacio")    
     reloj1 = pygame.time.Clock()
 
     salir = False
@@ -25,6 +25,7 @@ def main():
     advertencia = False
     primeraVez = True
     bloqueo_tecla_space = False
+    una_opcion = False
     audio = None
     
     fondo = Fondo(1)      
@@ -34,7 +35,21 @@ def main():
             if event.type == pygame.QUIT:
                 salir = True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:                                            
+                if event.key == pygame.K_DOWN:
+                    if una_opcion:
+                        if audio == 16:
+                            una_opcion = False
+                            print "Reproducir sonido de la pagina 17"
+                            fondo = Fondo(4)
+                            next.play()
+                            audio = 17
+                        if audio == 33:
+                            una_opcion = False
+                            print "Reproducir sonido de la pagina 34"
+                            fondo = Fondo(4)                            
+                            next.play()
+                            audio = 34
+                if event.key == pygame.K_LEFT:                       
                     if bloqueo_tecla_space:
                         if audio == 88:
                             print "Reproducir sonido de la pagina 94 - FIN"
@@ -58,6 +73,8 @@ def main():
                             audio = 48
                         if audio == 17:                            
                             print "Reproducir sonido de la pagina 33"
+                            fondo = Fondo(5)
+                            una_opcion = True
                             next.play()
                             audio = 33
                         if audio == 15:                            
@@ -101,11 +118,7 @@ def main():
                         if audio == 34:
                             print "Reproducir sonido de la pagina 50 - FIN"
                             next.play()
-                            audio = 50                            
-                        if audio == 33:                            
-                            print "Reproducir sonido de la pagina 34"
-                            next.play()
-                            audio = 34
+                            audio = 50                                                    
                         if audio == 17:
                             print "Reproducir sonido de la pagina 35 - FIN"
                             next.play()
@@ -113,13 +126,11 @@ def main():
                         if audio == 15:                            
                             print "Reproducir sonido de la pagina 32"
                             next.play()
-                            audio = 32
-                        if audio == 16:
-                            print "Reproducir sonido de la pagina 17"
-                            next.play()
-                            audio = 17
+                            audio = 32                        
                         if audio == 7:
                             print "Reproducir sonido de la pagina 16"
+                            fondo = Fondo(5)
+                            una_opcion = True                                                        
                             next.play()
                             audio = 16
                         if audio == 8:
