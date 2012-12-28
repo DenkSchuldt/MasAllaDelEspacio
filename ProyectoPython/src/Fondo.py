@@ -35,5 +35,7 @@ class Fondo(pygame.Surface):
             self.fondo = self.createSprite(0,0,"./images/img_04.jpg")
         if self.numero == 5:
             self.fondo = self.createSprite(0,0,"./images/img_05.jpg")
+        if self.numero == 'n':
+            self.fondo = self.createSprite(0,0,"./images/img_n.jpg")
         self.blit(self.fondo.image,self.fondo.rect)
         
