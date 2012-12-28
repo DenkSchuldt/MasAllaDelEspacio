@@ -9,16 +9,21 @@ import pygame
 from Fondo import *
 import time
 
+global historia
+global sound01
+
 #funciones
 def main():
     pygame.init()
     pygame.mixer.init()
-    sonido_01 = pygame.mixer.Sound("./sounds/sound_01.wav")
-    next = pygame.mixer.Sound("./sounds/next.wav")                            
-    sonido_01.play()
+    #sonido_01 = pygame.mixer.Sound("./sounds/sound_01.wav")
+    next = pygame.mixer.Sound("./sounds/next.wav")   
+    #sonido_01.play()
+    sound01=PlayAudio("sound_01.wav")
     pantalla = pygame.display.set_mode([900,600])
     pygame.display.set_caption("Mas Alla Del Espacio")    
     reloj1 = pygame.time.Clock()
+
 
     salir = False
     iniciar = True
@@ -549,6 +554,7 @@ def main():
                             print "Reproducir sonido de la pagina 3"
                             next.play()
                             audio = 3
+                            historia.stop()
                 if event.key == pygame.K_SPACE:
                     if not bloqueo_tecla_space:
                         if not primeraVez:
@@ -559,11 +565,14 @@ def main():
                             pantalla.blit(fondo,(0,0))
                             pygame.display.update()                            
                             iniciar = False                        
-                            fondo = Fondo(3)                        
-                            sonido_02 = pygame.mixer.Sound("./sounds/advertencia.wav")
-                            sonido_02.play()
+                            fondo = Fondo(3) 
+                            time.sleep(5)                       
+                            sonido_02=PlayAudio("advertencia.wav")                 
+                            #sonido_02 = pygame.mixer.Sound("./sounds/advertencia.wav")
+                            #sonido_02.play()
                             #time.sleep(3)
-                            sonido_01.stop()
+                            #sonido_01.stop()
+                            sound01.stop()
                             if primeraVez:
                                 primeraVez = False
                         if advertencia:
@@ -574,6 +583,7 @@ def main():
                             bloqueo_tecla_space = True
                             print "Reproducir sonido de la pagina 1"
                             audio = 1
+                            historia=PlayAudio("pagina1.wav")
                                                  
         reloj1.tick(20)
         pantalla.blit(fondo,(0,0))
@@ -581,5 +591,18 @@ def main():
         pygame.display.update()
                     
     pygame.quit()
+    
+    
+def PlayAudio (audio):
+    dir= "./sounds/"
+    ruta = dir+audio
+    sonido = pygame.mixer.Sound(ruta)
+    return sonido.play()  
+
+def Funcion(imp, num):
+    print "Reproducir sonido de la pagina"+imp
+    next=PlayAudio("next.wav")
+    audio=num
+    print audio
 
 main()                
