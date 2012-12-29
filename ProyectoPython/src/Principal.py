@@ -9,21 +9,19 @@ import pygame
 from Fondo import *
 import time
 
-global historia
-global sound01
+sonido_03 = None
+ultimo_audio = None
+audio_disponible = False
 
 #funciones
 def main():
     pygame.init()
     pygame.mixer.init()
-    #sonido_01 = pygame.mixer.Sound("./sounds/sound_01.wav")
-    next = pygame.mixer.Sound("./sounds/next.wav")   
-    #sonido_01.play()
-    sound01=PlayAudio("sound_01.wav")
+    sonido_01 = PlayAudio("sound_01.wav")
+    next = pygame.mixer.Sound("./sounds/next.wav")
     pantalla = pygame.display.set_mode([900,600])
     pygame.display.set_caption("Mas Alla Del Espacio")    
     reloj1 = pygame.time.Clock()
-
 
     salir = False
     iniciar = True
@@ -32,14 +30,54 @@ def main():
     bloqueo_tecla_space = False
     una_opcion = False
     audio = None
+    global sonido_03
+       
     
     fondo = Fondo(1)      
     
     while salir != True:
         for event in pygame.event.get():
+            #Cerrar ventana
             if event.type == pygame.QUIT:
                 salir = True
+            #Presionar cualquier tecla
             if event.type == pygame.KEYDOWN:
+                #Presionar la tecla espacio
+                if event.key == pygame.K_SPACE:
+                    if not bloqueo_tecla_space:
+                        if not primeraVez:
+                            advertencia = True                                        
+                        if iniciar:
+                            print "Iniciar Juego"
+                            fondo = Fondo(2)
+                            pantalla.blit(fondo,(0,0))
+                            pygame.display.update()                            
+                            iniciar = False                        
+                            fondo = Fondo(3) 
+                            time.sleep(3)                            
+                            sonido_02 = PlayAudio("advertencia.wav")                                             
+                            time.sleep(2)                            
+                            sonido_01.stop()
+                            if primeraVez:
+                                primeraVez = False
+                        if advertencia:
+                            sonido_02.stop()
+                            fondo = Fondo(4)
+                            pantalla.blit(fondo,(0,0))
+                            pygame.display.update()
+                            bloqueo_tecla_space = True
+                            print "Reproducir sonido de la pagina 1"
+                            audio = 1
+                            PlayAudio("pagina1.wav")
+                            global audio_disponible
+                            audio_disponible = True
+                
+                #Presionar la tecla 'Up'                
+                if event.key == pygame.K_UP:
+                    if audio_disponible:
+                        RepeatAudio()                        
+                            
+                #Presionar la tecla 'Down'                
                 if event.key == pygame.K_DOWN:
                     if una_opcion:
                         if audio == 99:
@@ -102,6 +140,8 @@ def main():
                             fondo = Fondo(4)                            
                             next.play()
                             audio = 34
+                            
+                #Presionar la tecla 'Left'
                 if event.key == pygame.K_LEFT:                       
                     if bloqueo_tecla_space:
                         if audio == 82:
@@ -326,7 +366,10 @@ def main():
                         if audio == 1:
                             print "Reproducir sonido de la pagina 2"
                             next.play()
-                            audio = 2                            
+                            sonido_03.stop()
+                            audio = 2
+                
+                #Presionar la tecla 'Right'                            
                 if event.key == pygame.K_RIGHT:
                     if bloqueo_tecla_space:
                         if audio == 90:
@@ -553,56 +596,36 @@ def main():
                         if audio == 1:
                             print "Reproducir sonido de la pagina 3"
                             next.play()
-                            audio = 3
-                            historia.stop()
-                if event.key == pygame.K_SPACE:
-                    if not bloqueo_tecla_space:
-                        if not primeraVez:
-                            advertencia = True                                        
-                        if iniciar:
-                            print "Iniciar Juego"
-                            fondo = Fondo(2)
-                            pantalla.blit(fondo,(0,0))
-                            pygame.display.update()                            
-                            iniciar = False                        
-                            fondo = Fondo(3) 
-                            time.sleep(5)                       
-                            sonido_02=PlayAudio("advertencia.wav")                 
-                            #sonido_02 = pygame.mixer.Sound("./sounds/advertencia.wav")
-                            #sonido_02.play()
-                            #time.sleep(3)
-                            #sonido_01.stop()
-                            sound01.stop()
-                            if primeraVez:
-                                primeraVez = False
-                        if advertencia:
-                            sonido_02.stop()
-                            fondo = Fondo(4)
-                            pantalla.blit(fondo,(0,0))
-                            pygame.display.update()
-                            bloqueo_tecla_space = True
-                            print "Reproducir sonido de la pagina 1"
-                            audio = 1
-                            historia=PlayAudio("pagina1.wav")
+                            sonido_03.stop()
+                            audio = 3                        
                                                  
         reloj1.tick(20)
-        pantalla.blit(fondo,(0,0))
-        #pantalla.blit(sprite1.image,sprite1.rect)        
+        pantalla.blit(fondo,(0,0))        
         pygame.display.update()
-                    
     pygame.quit()
     
     
 def PlayAudio (audio):
-    dir= "./sounds/"
-    ruta = dir+audio
-    sonido = pygame.mixer.Sound(ruta)
-    return sonido.play()  
+    global sonido_03
+    global ultimo_audio
+    if audio != ultimo_audio:
+        dir = "./sounds/"
+        ruta = dir + audio    
+        ultimo_audio = ruta 
+        sonido_03 = pygame.mixer.Sound(ruta)
+    else:
+        sonido_03 = pygame.mixer.Sound(ultimo_audio)     
+    return sonido_03.play()
 
-def Funcion(imp, num):
-    print "Reproducir sonido de la pagina"+imp
-    next=PlayAudio("next.wav")
-    audio=num
-    print audio
+def RepeatAudio():    
+    global sonido_03
+    global ultimo_audio    
+    sonido_03.stop()
+    sonido_03 = PlayAudio(ultimo_audio)    
+
+'''def Funcion(imp, num):
+    print "Reproducir sonido de la pagina " + str(imp)
+    next = PlayAudio("next.wav")    
+    print num'''
 
 main()                
