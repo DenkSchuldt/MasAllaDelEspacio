@@ -5,12 +5,12 @@
 # Main class del proyecto.
 
 #imports
+
+from Cursor import *
+from Boton import *
+from Fondo import *
 import pygame
 import time
-from Fondo import *
-from Boton import *
-from Cursor import *
-from threading import activeCount
 
 sonido_03 = None
 ultimo_audio = None
@@ -88,8 +88,9 @@ def main():
                         sonido_01.stop()
                     else:
                         sound_button = Boton(passive_on,active_on,820,30)
-                        sonido_fondo = True
-                        sonido_01 = PlayAudio("fondo.wav")                
+                        sonido_fondo = True                        
+                        sonido_01 = pygame.mixer.Sound("./sounds/fondo.wav")
+                        sonido_01.play(-1)                                
             #Presionar cualquier tecla
             if event.type == pygame.KEYDOWN:
                 #Presionar la tecla espacio
@@ -99,8 +100,7 @@ def main():
                     if not bloqueo_tecla_space:
                         if not primeraVez:
                             advertencia = True                                        
-                        if iniciar:
-                            print "Iniciar Juego"
+                        if iniciar:                            
                             fondo = Fondo(2)
                             pantalla.blit(fondo,(0,0))
                             pygame.display.update()                            
@@ -115,10 +115,9 @@ def main():
                             fondo = Fondo(4)
                             pantalla.blit(fondo,(0,0))
                             pygame.display.update()
-                            bloqueo_tecla_space = True
-                            print "Reproducir sonido de la pagina 1"
+                            bloqueo_tecla_space = True                            
                             audio = 1
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina01.wav")
                             global audio_disponible
                             audio_disponible = True
                             global instruccion_disponible
@@ -130,12 +129,12 @@ def main():
                 
                 #Presionar la tecla 'Up'                
                 if event.key == pygame.K_UP:
-                    if audio_disponible:
-                        RepeatAudio()
+                    if audio_disponible:                        
+                        RepeatAudio()                        
                 
                 #Presionar la tecla 'O'                
                 if event.key == pygame.K_o:
-                    if instruccion_disponible:
+                    if instruccion_disponible:                        
                         PlayInstruction(instruccion)
                         instruccion_sonando = True                             
                             
@@ -144,84 +143,65 @@ def main():
                     if una_opcion:
                         if audio is not "fin":
                             contador = contador + 1
-                        if audio == 99:
-                            una_opcion = False
                             StopAudios()
-                            print "Reproducir sonido de la pagina 1"
+                        if audio == 99:
+                            una_opcion = False                                            
                             fondo = Fondo(4)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina01.wav")
                             instruccion = "esfera_01.wav"                     
                             audio = 1
                         if audio == 59:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 60"
+                            una_opcion = False                            
                             fondo = Fondo(4)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina60.wav")
                             instruccion = "esfera_60.wav"
                             audio = 60
                         if audio == 67:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 2"
+                            una_opcion = False                      
                             fondo = Fondo(4)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina02.wav")
                             instruccion = "esfera_02.wav"                    
                             audio = 2                        
                         if audio == 48:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 2"
-                            PlayAudio("pagina1.wav")
+                            una_opcion = False                      
+                            PlayAudio("pagina02.wav")
                             instruccion = "esfera_02.wav"
                             fondo = Fondo(4)                            
                             audio = 2
                         if audio == 45:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 62"
-                            PlayAudio("pagina1.wav")
+                            una_opcion = False                      
+                            PlayAudio("pagina62.wav")
                             instruccion = "esfera_62.wav"
                             fondo = Fondo(4)                            
                             audio = 62
                         if audio == 43:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 3"
-                            PlayAudio("pagina1.wav")
+                            una_opcion = False                      
+                            PlayAudio("pagina03.wav")
                             instruccion = "esfera_03.wav"
                             fondo = Fondo(4)                            
                             audio = 3
                         if audio == 39:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 40"
+                            una_opcion = False                      
                             fondo = Fondo(4)        
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina40.wav")
                             instruccion = "esfera_40.wav"                    
                             audio = 40
                         if audio == 22:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 3"
-                            PlayAudio("pagina1.wav")
+                            una_opcion = False                                                
+                            PlayAudio("pagina03.wav")
                             instruccion = "esfera_03.wav"
                             fondo = Fondo(4)                            
                             audio = 3
                         if audio == 16:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 17"
+                            una_opcion = False                            
                             fondo = Fondo(4)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina17.wav")
                             instruccion = "esfera_17.wav"
                             audio = 17
                         if audio == 33:
-                            una_opcion = False
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 34"
+                            una_opcion = False                            
                             fondo = Fondo(4)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina34.wav")
                             instruccion = "esfera_34.wav"
                             audio = 34
                             
@@ -230,323 +210,228 @@ def main():
                     if bloqueo_tecla_space:
                         if audio is not "fin":
                             contador = contador + 1
-                        if audio == 82:
                             StopAudios()
-                            print "Reproducir sonido de la pagina 113 - FIN"
+                        if audio == 82:                                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina113.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 80:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 111 - FIN"
+                        if audio == 80:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina111.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 79:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 109 - FIN"
+                        if audio == 79:                            
                             fondo = Fondo('n')                                                        
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina109.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 91:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 102 - FIN"
+                        if audio == 91:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina102.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 90:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 101 - FIN"
+                        if audio == 90:                      
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina101.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 84:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 115 - FIN"
+                        if audio == 84:                            
                             fondo = Fondo('n')      
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina115.wav")
                             instruccion = "fin.wav"                      
                             audio = "fin"
-                        if audio == 60:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 80"
-                            PlayAudio("pagina1.wav")
+                        if audio == 60:                            
+                            PlayAudio("pagina80.wav")
                             instruccion = "esfera_80.wav"                                                        
                             audio = 80
-                        if audio == 93:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 107 - FIN"
+                        if audio == 93:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina107.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 56:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 78 - FIN"
+                        if audio == 56:                      
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina78.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 55:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 76 - FIN"
+                        if audio == 55:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina76.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 70:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 99"
+                        if audio == 70:                            
                             fondo = Fondo(5)
                             una_opcion = True
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina99.wav")
                             instruccion = "abajo.wav"
                             audio = 99
-                        if audio == 69:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 97 - FIN"
+                        if audio == 69:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina97.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 74:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 92 - FIN"
+                        if audio == 74:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina92.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 72:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 90"
-                            PlayAudio("pagina1.wav")
+                        if audio == 72:                            
+                            PlayAudio("pagina90.wav")
                             instruccion = "esfera_90.wav"                                                        
                             audio = 90
-                        if audio == 64:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 86 - FIN"
+                        if audio == 64:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina86.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 61:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 83 - FIN"
+                        if audio == 61:                                                
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina83.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 40:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 55"
-                            PlayAudio("pagina1.wav")
+                        if audio == 40:                            
+                            PlayAudio("pagina55.wav")
                             instruccion = "esfera_55.wav"                                                        
                             audio = 55
-                        if audio == 52:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 69"
-                            PlayAudio("pagina1.wav")
+                        if audio == 52:                            
+                            PlayAudio("pagina69.wav")
                             instruccion = "esfera_69.wav"                                                        
                             audio = 69
-                        if audio == 51:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 67"
+                        if audio == 51:                            
                             fondo = Fondo(5)
                             una_opcion = True       
-                            PlayAudio("pagina1.wav")
-                            instruccion = "abajo.wav"                                                 
+                            PlayAudio("pagina67.wav")
+                            instruccion = "esfera_67.wav"                                                 
                             audio = 67
-                        if audio == 54:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 74"
-                            PlayAudio("pagina1.wav")
+                        if audio == 54:                      
+                            PlayAudio("pagina74.wav")
                             instruccion = "esfera_74.wav"                                                        
                             audio = 74
-                        if audio == 53:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 72"
-                            PlayAudio("pagina1.wav")
+                        if audio == 53:                            
+                            PlayAudio("pagina72.wav")
                             instruccion = "esfera_72.wav"                                                        
                             audio = 72
-                        if audio == 62:
-                            StopAudios()
-                            print "Has elejido el FIN"
+                        if audio == 62:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("fin.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 44:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 59"
+                        if audio == 44:                            
                             una_opcion = True
                             fondo = Fondo(5)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina59.wav")
                             instruccion = "abajo.wav"
                             audio = 59
-                        if audio == 28:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 44"                            
-                            PlayAudio("pagina1.wav")
+                        if audio == 28:                                                    
+                            PlayAudio("pagina44.wav")
                             instruccion = "esfera_44.wav"                                                        
                             audio = 44
-                        if audio == 42:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 57 - FIN"
+                        if audio == 42:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina57.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 38:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 51"
-                            PlayAudio("pagina1.wav")
+                        if audio == 38:                            
+                            PlayAudio("pagina51.wav")
                             instruccion = "esfera_51.wav"                                                        
                             audio = 51
-                        if audio == 36:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 53"
-                            PlayAudio("pagina1.wav")
+                        if audio == 36:                            
+                            PlayAudio("pagina53.wav")
                             instruccion = "esfera_53.wav"                                                        
                             audio = 53
-                        if audio == 27:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 42"
-                            PlayAudio("pagina1.wav")
+                        if audio == 27:                      
+                            PlayAudio("pagina42.wav")
                             instruccion = "esfera_42.wav"                                                        
                             audio = 42
-                        if audio == 23:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 39"
+                        if audio == 23:                            
                             una_opcion = True
                             fondo = Fondo(5)
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina39.wav")
                             instruccion = "abajo.wav"
                             audio = 39
-                        if audio == 20:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 36"
-                            PlayAudio("pagina1.wav")
+                        if audio == 20:                            
+                            PlayAudio("pagina36.wav")
                             instruccion = "esfera_36.wav"                                                        
                             audio = 36
-                        if audio == 14:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 28"
-                            PlayAudio("pagina1.wav")
+                        if audio == 14:                            
+                            PlayAudio("pagina28.wav")
                             instruccion = "esfera_28.wav"                                                        
                             audio = 28
-                        if audio == 12:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 24 - FIN"
+                        if audio == 12:                                                
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina24.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 11:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 23"
-                            PlayAudio("pagina1.wav")
+                        if audio == 11:                            
+                            PlayAudio("pagina23.wav")
                             instruccion = "esfera_23.wav"                                                        
                             audio = 23
-                        if audio == 10:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 20"
-                            PlayAudio("pagina1.wav")
+                        if audio == 10:                            
+                            PlayAudio("pagina20.wav")
                             instruccion = "esfera_20.wav"                                                        
                             audio = 20
-                        if audio == 6:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 12"
-                            PlayAudio("pagina1.wav")
+                        if audio == 6:                            
+                            PlayAudio("pagina12.wav")
                             instruccion = "esfera_12.wav"
                             audio = 12
-                        if audio == 4:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 10"
-                            PlayAudio("pagina1.wav")
+                        if audio == 4:                      
+                            PlayAudio("pagina10.wav")
                             instruccion = "esfera_10.wav"                                                        
                             audio = 10
-                        if audio == 2:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 4"
-                            PlayAudio("pagina1.wav")
+                        if audio == 2:                            
+                            PlayAudio("pagina04.wav")
                             instruccion = "esfera_04.wav"                                                        
                             audio = 4
                         if audio == 88:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 94 - FIN"
                             fondo = Fondo('n')      
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina94.wav")
                             instruccion = "fin.wav"                      
                             audio = "fin"                         
-                        if audio == 65:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 88"
-                            PlayAudio("pagina1.wav")
+                        if audio == 65:                            
+                            PlayAudio("pagina88.wav")
                             instruccion = "esfera_88.wav"                            
                             audio = 88
-                        if audio == 46:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 65"
-                            PlayAudio("pagina1.wav")
+                        if audio == 46:                      
+                            PlayAudio("pagina65.wav")
                             instruccion = "esfera_65.wav"                            
                             audio = 65
                         if audio == 32:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 46"
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina46.wav")
                             instruccion = "esfera_46.wav"                            
                             audio = 46
-                        if audio == 34:
-                            StopAudios()                      
-                            print "Reproducir sonido de la pagina 48"
+                        if audio == 34:                                             
                             fondo = Fondo(5)
                             una_opcion = True   
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina48.wav")
                             instruccion = "abajo.wav"                         
                             audio = 48
-                        if audio == 17:      
-                            StopAudios()                      
-                            print "Reproducir sonido de la pagina 33"
+                        if audio == 17:                                                  
                             fondo = Fondo(5)
                             una_opcion = True 
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina33.wav")
                             instruccion = "abajo.wav"                           
                             audio = 33
-                        if audio == 15:       
-                            StopAudios()                     
-                            print "Reproducir sonido de la pagina 30 - FIN"
+                        if audio == 15:                                                        
                             fondo = Fondo('n')      
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina30.wav")
                             instruccion = "fin.wav"                      
                             audio = "fin"                         
-                        if audio == 7:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 15"
-                            PlayAudio("pagina1.wav")
+                        if audio == 7:                            
+                            PlayAudio("pagina15.wav")
                             instruccion = "esfera_15.wav"                            
                             audio = 15
-                        if audio == 8:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 18 - FIN"
+                        if audio == 8:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina18.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"
-                        if audio == 3:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 7"
-                            PlayAudio("pagina1.wav")
+                        if audio == 3:                            
+                            PlayAudio("pagina07.wav")
                             instruccion = "esfera_07.wav"                            
                             audio = 7                            
-                        if audio == 1:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 2"
-                            PlayAudio("pagina1.wav")
+                        if audio == 1:                                                    
+                            PlayAudio("pagina02.wav")
                             instruccion = "esfera_02.wav"                            
                             audio = 2
                 
@@ -555,325 +440,230 @@ def main():
                     if bloqueo_tecla_space:
                         if audio is not "fin":
                             contador = contador + 1
-                        if audio == 90:
                             StopAudios()
-                            print "Reproducir sonido de la pagina 106 - FIN"
+                        if audio == 90:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina106.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 91:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 105 - FIN"
+                        if audio == 91:                                                        
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina105.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 79:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 110 - FIN"
+                        if audio == 79:                                                    
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina110.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 80:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 112 - FIN"
+                        if audio == 80:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina112.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 82:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 114 - FIN"
+                        if audio == 82:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina114.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 84:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 116 - FIN"
+                        if audio == 84:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina116.wav")
                             instruccion = "fin.wav"                                                  
                             audio = "fin"
-                        if audio == 60:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 82"
-                            PlayAudio("pagina1.wav")
+                        if audio == 60:                            
+                            PlayAudio("pagina82.wav")
                             instruccion = "esfera_82.wav"                                                        
                             audio = 82
-                        if audio == 56:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 79"
-                            PlayAudio("pagina1.wav")
+                        if audio == 56:                            
+                            PlayAudio("pagina79.wav")
                             instruccion = "esfera_79.wav"                                                        
                             audio = 79
-                        if audio == 55:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 77 - FIN"
+                        if audio == 55:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina77.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 70:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 100 - FIN"
+                        if audio == 70:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina100.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"
-                        if audio == 69:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 98 - FIN"
+                        if audio == 69:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina98.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 93:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 108 - FIN"
+                        if audio == 93:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina108.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 74:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 93"                                                        
+                        if audio == 74:                                                                                
                             audio = 93
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina93.wav")
                             instruccion = "esfera_93.wav"
-                        if audio == 72:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 91"
-                            PlayAudio("pagina1.wav")
+                        if audio == 72:                            
+                            PlayAudio("pagina91.wav")
                             instruccion = "esfera_91.wav"                                                        
                             audio = 91
-                        if audio == 64:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 87 - FIN"
+                        if audio == 64:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina87.wav")
                             instruccion = "esfera_87.wav"                                                  
                             audio = "fin"
-                        if audio == 61:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 84"
-                            PlayAudio("pagina1.wav")
+                        if audio == 61:                            
+                            PlayAudio("pagina84.wav")
                             instruccion = "esfera_84.wav"                                                        
                             audio = 84
-                        if audio == 40:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 56"
-                            PlayAudio("pagina1.wav")
+                        if audio == 40:                            
+                            PlayAudio("pagina56.wav")
                             instruccion = "esfera_56.wav"                                                        
                             audio = 56
-                        if audio == 52:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 70"
-                            PlayAudio("pagina1.wav")
+                        if audio == 52:                            
+                            PlayAudio("pagina70.wav")
                             instruccion = "esfera_70.wav"                                                        
                             audio = 70
-                        if audio == 51:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 68 - FIN"
+                        if audio == 51:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina68.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 54:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 75 - FIN"
+                        if audio == 54:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina75.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"                     
-                        if audio == 53:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 73 - FIN"
+                        if audio == 53:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina73.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 62:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 64"
-                            PlayAudio("pagina1.wav")
+                        if audio == 62:                            
+                            PlayAudio("pagina64.wav")
                             instruccion = "esfera_64.wav"                                                        
                             audio = 64
-                        if audio == 44:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 61"
-                            PlayAudio("pagina1.wav")
+                        if audio == 44:                            
+                            PlayAudio("pagina61.wav")
                             instruccion = "esfera_61.wav"                                                        
                             audio = 61
-                        if audio == 28:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 45"
+                        if audio == 28:                            
                             fondo = Fondo(5)
                             una_opcion = True 
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina45.wav")
                             instruccion = "abajo.wav"                                                       
                             audio = 45
-                        if audio == 42:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 58 - FIN"
+                        if audio == 42:                            
                             fondo = Fondo('n')      
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina58.wav")
                             instruccion = "fin.wav"                                                  
                             audio = "fin"
-                        if audio == 38:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 52"
-                            PlayAudio("pagina1.wav")
+                        if audio == 38:                            
+                            PlayAudio("pagina52.wav")
                             instruccion = "esfera_52.wav"                                                        
                             audio = 52
-                        if audio == 36:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 54"
-                            PlayAudio("pagina1.wav")
+                        if audio == 36:                            
+                            PlayAudio("pagina54.wav")
                             instruccion = "esfera_54.wav"                                                        
                             audio = 54
-                        if audio == 27:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 43"
+                        if audio == 27:                            
                             fondo = Fondo(5)
                             una_opcion = True       
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina43.wav")
                             instruccion = "abajo.wav"                                                 
                             audio = 43
-                        if audio == 23:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 41"
+                        if audio == 23:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina41.wav")
                             instruccion = "esfera_41.wav"
                             audio = 41
-                        if audio == 20:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 38"
-                            PlayAudio("pagina1.wav")
+                        if audio == 20:                            
+                            PlayAudio("pagina38.wav")
                             instruccion = "esfera_38.wav"                                                        
                             audio = 38
-                        if audio == 14:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 29 - FIN"
+                        if audio == 14:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina29.wav")
                             instruccion = "fin.wav"
                             audio = "fin"
-                        if audio == 12:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 27"
-                            PlayAudio("pagina1.wav")
+                        if audio == 12:                            
+                            PlayAudio("pagina27.wav")
                             instruccion = "esfera_27.wav"                                                        
                             audio = 27
-                        if audio == 11:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 26 - FIN"
+                        if audio == 11:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina26.wav")
                             instruccion = "fin.wav"                                                        
                             audio = "fin"
-                        if audio == 10:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 22"
+                        if audio == 10:                            
                             fondo = Fondo(5)
                             una_opcion = True
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina22.wav")
                             instruccion = "abajo.wav"
                             audio = 22
-                        if audio == 6:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 14"
-                            PlayAudio("pagina1.wav")
+                        if audio == 6:                            
+                            PlayAudio("pagina14.wav")
                             instruccion = "esfera_14.wav"                                                        
                             audio = 14
-                        if audio == 4:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 11"
-                            PlayAudio("pagina1.wav")
+                        if audio == 4:                            
+                            PlayAudio("pagina11.wav")
                             instruccion = "esfera_11.wav"                                                        
                             audio = 11
-                        if audio == 2:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 6"
-                            PlayAudio("pagina1.wav")
+                        if audio == 2:                            
+                            PlayAudio("pagina06.wav")
                             instruccion = "esfera_06.wav"                                                        
                             audio = 6
-                        if audio == 88:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 96 - FIN"
+                        if audio == 88:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina96.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"                         
-                        if audio == 65:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 89 - FIN"
+                        if audio == 65:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina89.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"                         
-                        if audio == 46:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 66 - FIN"
+                        if audio == 46:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina66.wav")
                             instruccion = "fin.wav"                        
                             audio = "fin"                         
-                        if audio == 32:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 49 - FIN"
+                        if audio == 32:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina49.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"                         
-                        if audio == 34:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 50 - FIN"
+                        if audio == 34:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina50.wav")
                             instruccion = "fin.wav"                            
                             audio = "fin"
-                        if audio == 17:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 35 - FIN"
+                        if audio == 17:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina35.wav")
                             instruccion = "fin.wav"
                             audio = "fin"                         
-                        if audio == 15:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 32"
-                            PlayAudio("pagina1.wav")
+                        if audio == 15:                            
+                            PlayAudio("pagina32.wav")
                             instruccion = "esfera_32.wav"
                             audio = 32                        
-                        if audio == 7:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 16"
+                        if audio == 7:                            
                             fondo = Fondo(5)                            
                             una_opcion = True                                                        
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina16.wav")
                             instruccion = "abajo.wav"
                             audio = 16
-                        if audio == 8:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 19 - FIN"
+                        if audio == 8:                            
                             fondo = Fondo('n')
-                            PlayAudio("pagina1.wav")
+                            PlayAudio("pagina19.wav")
                             instruccion = "fin.wav"
                             audio = "fin"                         
-                        if audio == 3:
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 8"
-                            PlayAudio("pagina1.wav")
+                        if audio == 3:  
+                            PlayAudio("pagina08.wav")
                             instruccion = "esfera_08.wav"
                             audio = 8
-                        if audio == 1:                            
-                            StopAudios()
-                            print "Reproducir sonido de la pagina 3"
-                            PlayAudio("pagina1.wav")
+                        if audio == 1:                                                                        
+                            PlayAudio("pagina03.wav")
                             instruccion = "esfera_03.wav"
                             audio = 3                        
         reloj1.tick(20)
